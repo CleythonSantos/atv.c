@@ -7,7 +7,7 @@ export default function App() {
       <StatusBar barStyle="light-content" backgroundColor="#1f1f1f" />
       <View style={styles.card}>
         <Image
-          source={{ uri: 'https://www.instagram.com/cleyth4n__?igsh=dHl4dzIzZDJsZnM3' }}
+          source={{ uri: 'https://blog.eumilitar.com/wp-content/uploads/2021/05/33229282051_f534c464c8_c-768x512.jpg' }}
           style={styles.profileImage}
         />
         <Text style={styles.name}>Cleython Santos</Text>
