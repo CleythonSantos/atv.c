@@ -1,0 +1,115 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, TouchableOpacity, StyleSheet, Image } from 'react-native';
+
+export default function App() {
+  const [name, setName] = useState('');
+  const [greeting, setGreeting] = useState('');
+
+  const getGreetingTime = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Bom dia';
+    if (hour < 18) return 'Boa tarde';
+    return 'Boa noite';
+  };
+
+  const updateGreeting = () => {
+    if (name.trim()) {
+      setGreeting(`${getGreetingTime()}, ${name}! Bem-vindo(a) ao nosso App!`);
+    }
+  };
+
+  const clearGreeting = () => {
+    setName('');
+    setGreeting('');
+  };
+
+  return (
+    <View style={styles.container}>
+      <Image source={{ uri: 'https://source.unsplash.com/400x200/?sunrise' }} style={styles.image} />
+      <Text style={styles.title}>Olá! Como podemos te chamar?</Text>
+      <TextInput
+        style={styles.input}
+        placeholder="Digite seu nome..."
+        placeholderTextColor="#888"
+        value={name}
+        onChangeText={setName}
+      />
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.button} onPress={updateGreeting}>
+          <Text style={styles.buttonText}>Mostrar Saudação</Text>
+        </TouchableOpacity>
+        <TouchableOpacity style={[styles.button, styles.clearButton]} onPress={clearGreeting}>
+          <Text style={styles.buttonText}>Limpar</Text>
+        </TouchableOpacity>
+      </View>
+      {greeting ? <Text style={styles.greeting}>{greeting}</Text> : null}
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+    backgroundColor: '#4A90E2',
+  },
+  image: {
+    width: 300,
+    height: 150,
+    marginBottom: 20,
+    borderRadius: 10,
+  },
+  title: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#fff',
+    marginBottom: 15,
+  },
+  input: {
+    width: '80%',
+    padding: 12,
+    borderWidth: 1,
+    borderColor: '#fff',
+    borderRadius: 8,
+    marginBottom: 15,
+    backgroundColor: '#fff',
+    fontSize: 16,
+    textAlign: 'center',
+    color: '#333',
+  },
+  buttonContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '80%',
+    marginBottom: 20,
+  },
+  button: {
+    backgroundColor: '#FFD700',
+    paddingVertical: 12,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+    alignItems: 'center',
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  clearButton: {
+    backgroundColor: '#FF5733',
+  },
+  buttonText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#333',
+  },
+  greeting: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#FFD700',
+    marginTop: 10,
+    textAlign: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.2)',
+    padding: 10,
+    borderRadius: 10,
+  },
+});
